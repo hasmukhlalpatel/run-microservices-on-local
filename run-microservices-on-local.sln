@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{68ED2354-7DA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2C20BC5C-19D6-4390-AAB5-768867FED9A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Shared", "src\Samples.Shared\Samples.Shared.csproj", "{39DCFD0F-FD7F-40F1-AD84-A8F3401A405A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Shared", "src\Samples.Shared\Samples.Shared.csproj", "{39DCFD0F-FD7F-40F1-AD84-A8F3401A405A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.StorageQueue.Function", "src\Samples.StorageQueue.Function\Samples.StorageQueue.Function.csproj", "{8EA73F5B-78F1-450B-B801-E461FE230513}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.StorageQueue.Function", "src\Samples.StorageQueue.Function\Samples.StorageQueue.Function.csproj", "{8EA73F5B-78F1-450B-B801-E461FE230513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.HttpTrigger.Function", "src\Samples.HttpTrigger.Function\Samples.HttpTrigger.Function.csproj", "{54C46D8A-E794-4AEC-89D2-636FF8F43724}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8EA73F5B-78F1-450B-B801-E461FE230513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EA73F5B-78F1-450B-B801-E461FE230513}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EA73F5B-78F1-450B-B801-E461FE230513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C46D8A-E794-4AEC-89D2-636FF8F43724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C46D8A-E794-4AEC-89D2-636FF8F43724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C46D8A-E794-4AEC-89D2-636FF8F43724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C46D8A-E794-4AEC-89D2-636FF8F43724}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{39DCFD0F-FD7F-40F1-AD84-A8F3401A405A} = {68ED2354-7DA6-4274-A98E-3528501EE025}
 		{8EA73F5B-78F1-450B-B801-E461FE230513} = {68ED2354-7DA6-4274-A98E-3528501EE025}
+		{54C46D8A-E794-4AEC-89D2-636FF8F43724} = {68ED2354-7DA6-4274-A98E-3528501EE025}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F30ED84-A526-4E80-AB32-C99B2CE0CB73}

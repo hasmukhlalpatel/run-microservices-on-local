@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Samples.StorageQueue.Function": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --port 8090 --pause-on-error"
+    }
+  }
+}

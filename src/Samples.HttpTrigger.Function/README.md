@@ -1,0 +1,10 @@
+local.settings.json
+```
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+    }
+}
+```
