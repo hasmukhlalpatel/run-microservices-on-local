@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
@@ -14,7 +13,7 @@ namespace Samples.StorageQueue.Function
         }
 
         [Function("Function1")]
-        public void Run([QueueTrigger("sample-queue-items", Connection = "StorageQueueConnectionString")] string myQueueItem)
+        public void Run([QueueTrigger("%StorageQueueName%", Connection = "StorageQueueConnectionString")] string myQueueItem)
         {
             _logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
         }
