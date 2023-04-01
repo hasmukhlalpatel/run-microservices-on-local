@@ -13,19 +13,29 @@ ingress:
 # define multiple services here
 name: samples.functions
 services:
-#- name: azure-eventgrid-simulator
-#  project: D:\Repos\Azure.EventGrid.Simulator.Sample\src\Azure.EventGrid.Simulator.Sample\Azure.EventGrid.Simulator.Sample.csproj # msbuild project path (relative to this file)
-#  # executable: app.exe # path to an executable (relative to this file)
-#  # args: --arg1=3 # arguments to pass to the process
-#  # replicas: 5 # number of times to launch the application
-#  # env: # array of environment variables
-#  #  - name: key
-#  #    value: value
-#  bindings: # optional array of bindings (ports, connection strings)
-#  - name: http
-#    protocol: https
-#    port: 5002 # number port of the binding 
-#
+- name: azure-eventgrid-simulator
+  project: ..\Azure.EventGrid.Simulator.Sample\src\Azure.EventGrid.Simulator.Sample\Azure.EventGrid.Simulator.Sample.csproj # msbuild project path (relative to this file)
+  # executable: app.exe # path to an executable (relative to this file)
+  # args: --arg1=3 # arguments to pass to the process
+  # replicas: 5 # number of times to launch the application
+  # env: # array of environment variables
+  #  - name: key
+  #    value: value
+  bindings: # optional array of bindings (ports, connection strings)
+  - name: http
+    protocol: https
+    port: 5002 # number port of the binding 
+
+- name: azure-keyvault-simulator
+  project: ..\Azure.KeyVault.Simulator.Sample\src\Azure.KeyVault.Simulator.Sample\Azure.KeyVault.Simulator.Sample.csproj # msbuild project path (relative to this file)
+  bindings: # optional array of bindings (ports, connection strings)
+  - name: http
+    protocol: http
+    port: 5005 # number port of the binding 
+  - name: https
+    protocol: https
+    port: 5006 # number port of the binding 
+
 - name: samples-httptrigger-function
 #  project: src\Samples.HttpTrigger.Function\Samples.HttpTrigger.Function.csproj
   executable: dotnet
