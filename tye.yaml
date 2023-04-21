@@ -18,9 +18,9 @@ services:
   # executable: app.exe # path to an executable (relative to this file)
   # args: --arg1=3 # arguments to pass to the process
   # replicas: 5 # number of times to launch the application
-  # env: # array of environment variables
-  #  - name: key
-  #    value: value
+  env: # array of environment variables
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Local
   bindings: # optional array of bindings (ports, connection strings)
   - name: http
     protocol: https
@@ -55,6 +55,16 @@ services:
   - name: http
     protocol: http
     port: 8090 # number port of the binding 
+
+- name: samples-servicebusqueue-function
+  executable: dotnet
+  args: C:\Users\hasu\AppData\Local\AzureFunctionsTools\Releases\4.35.0\cli_x64\func.dll host start --prefix ./bin/Debug/net6.0 --port 8092
+  workingDirectory: src\Samples.ServiceBusQueue.Function
+#  project: src\Samples.ServiceBusQueue.Function\Samples.ServiceBusQueue.Function.csproj
+  bindings: # optional array of bindings (ports, connection strings)
+  - name: http
+    protocol: http
+    port: 8092 # number port of the binding 
     
 #- name: azure-fucntion-3-sample
 #  executable: dotnet
