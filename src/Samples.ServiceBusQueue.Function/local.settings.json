@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "ServiceBusConectionString": "Endpoint=sb://{your-namespace}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey={key}",
-    "QueueName": "sample-queue"
+    "ServiceBus:ConectionString": "Endpoint=sb://{your-namespace}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey={key}",
+    "ServiceBus:QueueName": "sample-queue"
   }
 }

@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "StorageQueueConnectionString": "UseDevelopmentStorage=true",
-    "StorageQueueName": "sample-queue-items"
+    "Storage:ConnectionString": "UseDevelopmentStorage=true",
+    "Storage:QueueName": "sample-queue"
   }
 }
