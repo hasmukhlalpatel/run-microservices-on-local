@@ -25,3 +25,21 @@ If you haven't installed tye, follow the [Getting Started Instructions](https://
 
 	#### Tips
 	- How to access [Azure KeyVault Simulator homepage](https://localhost:5006/) after `try run`?
+
+* [Azure Azure Cosmos DB Emulator (Intall & Run on local)](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21)
+	or [run on Docker](https://learn.microsoft.com/en-us/azure/cosmos-db/docker-emulator-windows?tabs=cli)
+	```
+	docker pull mcr.microsoft.com/cosmosdb/windows/azure-cosmos-emulator
+	```
+
+	#### Tips
+	- How to access [Azure Cosmos DB Emulator homepage]( https://localhost:8081/_explorer/index.html)?
+
+* [Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/blob/main/docs/getting-started/getting-started.md) generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database.
+	To install on local 
+	```
+	dotnet tool install --global Microsoft.DataApiBuilder
+	```
+
+	#### Tips
+	- How to setup [ REST and GraphQL endpoints for Azure Cosmos DB Emulator](https://github.com/Azure/data-api-builder/blob/main/docs/getting-started/getting-started-azure-cosmos-db.md)?
