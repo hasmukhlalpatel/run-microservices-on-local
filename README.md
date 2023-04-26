@@ -42,4 +42,9 @@ If you haven't installed tye, follow the [Getting Started Instructions](https://
 	```
 
 	#### Tips
-	- How to setup [ REST and GraphQL endpoints for Azure Cosmos DB Emulator](https://github.com/Azure/data-api-builder/blob/main/docs/getting-started/getting-started-azure-cosmos-db.md)?
+	- How to setup [REST and GraphQL endpoints for Azure Cosmos DB Emulator](https://github.com/Azure/data-api-builder/blob/main/docs/getting-started/getting-started-azure-cosmos-db.md)?
+	- Setup 
+	```
+	cd  graphql
+	dab init --database-type "cosmosdb_nosql" --graphql-schema schema.gql --cosmosdb_nosql-database titanStoreDB --connection-string "AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;" --host-mode "Development"
+	```

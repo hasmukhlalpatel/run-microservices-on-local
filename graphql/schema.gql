@@ -1,0 +1,10 @@
+type Book @model {
+  id: ID
+  name: String
+  Suppliers: [Author]
+}
+
+type Supplier {
+  id: ID
+  name: String
+}
