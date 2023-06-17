@@ -28,6 +28,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graphql", "graphql", "{1899
 		graphql\schema.gql = graphql\schema.gql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dapr", "Dapr", "{AB6F9397-E90A-49FF-B6AA-C4406CDC6F2F}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\dapr.yaml = dapr\dapr.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -53,3 +53,4 @@ If you haven't installed tye, follow the [Getting Started Instructions](https://
 * The Distributed Application Runtime [Dapr](https://dapr.io/) provides APIs that simplify microservice connectivity. Whether your communication pattern is service to service invocation or pub/sub messaging, Dapr helps you write resilient and secured microservices.
 	### Tips
 	- [An article - Implementing Dapr State Management in ASP.NET Core Web APIs](https://levelup.gitconnected.com/implementing-dapr-state-management-in-asp-net-core-web-apis-6878c95bdf10)
+	- [Dev.to article](https://dev.to/willvelida/implementing-dapr-state-management-in-aspnet-core-web-apis-42lk)
