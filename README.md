@@ -54,3 +54,8 @@ If you haven't installed tye, follow the [Getting Started Instructions](https://
 	### Tips
 	- [An article - Implementing Dapr State Management in ASP.NET Core Web APIs](https://levelup.gitconnected.com/implementing-dapr-state-management-in-asp-net-core-web-apis-6878c95bdf10)
 	- [Dev.to article](https://dev.to/willvelida/implementing-dapr-state-management-in-aspnet-core-web-apis-42lk)
+
+* [Kafka using Docekr](https://github.com/conduktor/kafka-stack-docker-compose)
+
+	- [Another link to setup Kafka](https://www.baeldung.com/ops/kafka-docker-setup)
+	
