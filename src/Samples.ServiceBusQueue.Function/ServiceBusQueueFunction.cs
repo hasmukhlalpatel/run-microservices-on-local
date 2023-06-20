@@ -14,7 +14,7 @@ namespace Samples.ServiceBusQueue.Function
         }
 
         [Function("ServiceBusQueueFunctionSample")]
-        public void Run([ServiceBusTrigger("sample-queue", Connection = "ServiceBus:ConectionString")] string myQueueItem)
+        public void Run([ServiceBusTrigger("myqueue", Connection = "EmulatorConnectionString")] string myQueueItem)
         {
             _logger.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
         }
