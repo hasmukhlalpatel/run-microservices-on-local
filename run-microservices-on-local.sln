@@ -25,6 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.ServiceBusQueue.Fun
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graphql", "graphql", "{1899EEAE-BDAF-4A8A-AE5A-F157EA57FEB3}"
 	ProjectSection(SolutionItems) = preProject
+		graphql\dab-config.json = graphql\dab-config.json
 		graphql\schema.gql = graphql\schema.gql
 	EndProjectSection
 EndProject

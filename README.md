@@ -36,6 +36,7 @@ If you haven't installed tye, follow the [Getting Started Instructions](https://
 	- How to access [Azure Cosmos DB Emulator homepage]( https://localhost:8081/_explorer/index.html)?
 
 * [Data API builder for Azure Databases](https://github.com/Azure/data-api-builder/blob/main/docs/getting-started/getting-started.md) generates REST and GraphQL endpoints for database objects, you need to have a database ready for the tutorial. You can choose either a relational or non-relational database.
+* [Data API builder for Azure Databases](https://learn.microsoft.com/en-gb/azure/data-api-builder/)
 	To install on local 
 	```
 	dotnet tool install --global Microsoft.DataApiBuilder

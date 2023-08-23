@@ -1,7 +1,15 @@
 type Book @model {
   id: ID
-  name: String
-  Suppliers: [Author]
+  title: String
+  Authors: [Author]
+  Supplier :[Supplier]
+}
+
+type Author {
+  id: ID
+  first_name: String
+  middle_name: String
+  last_name: String
 }
 
 type Supplier {
