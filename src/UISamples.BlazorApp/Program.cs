@@ -21,7 +21,14 @@ builder.Services.AddAzureClients(clientBuilder =>
 {
     // Register clients for each service
     clientBuilder.AddSecretClient(new Uri(keyVaultUri));
-    clientBuilder.AddBlobServiceClient(new Uri(blobStorageUri));
+    clientBuilder.AddBlobServiceClient(new Uri(blobStorageUri))
+        //.WithName("TestName")
+        .ConfigureOptions(options =>
+        {
+            options.Retry.Mode = Azure.Core.RetryMode.Exponential;
+            options.Retry.MaxRetries = 5;
+            options.Retry.MaxDelay = TimeSpan.FromSeconds(120);
+        }); 
     clientBuilder.AddServiceBusClientWithNamespace(
         $"{serviceBusNamespace}.servicebus.windows.net");
     clientBuilder.UseCredential(new DefaultAzureCredential());

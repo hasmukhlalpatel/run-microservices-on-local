@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Samples.StorageQueue.Function
 {
+    //[StorageAccount("MyStorageAccount")] // remove 'Connection' property from Function
     public class StorageQueueFunction
     {
         private readonly ILogger _logger;

@@ -5,3 +5,4 @@ var host = new HostBuilder()
     .Build();
 
 host.Run();
+//TODO: add health check and monitoring

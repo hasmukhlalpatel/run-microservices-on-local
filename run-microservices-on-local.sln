@@ -34,9 +34,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dapr", "dapr", "{AB6F9397-E
 		dapr\statestore.yaml = dapr\statestore.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UISamples.BlazorApp", "src\UISamples.BlazorApp\UISamples.BlazorApp.csproj", "{2F3086DF-1A58-49CB-BD88-0F639342017D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UISamples.BlazorApp", "src\UISamples.BlazorApp\UISamples.BlazorApp.csproj", "{2F3086DF-1A58-49CB-BD88-0F639342017D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UISamples.Angular", "src\UISamples.Angular\UISamples.Angular.csproj", "{0B320BCD-8FD8-480B-9BE4-CD138C2CD3BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UISamples.Angular", "src\UISamples.Angular\UISamples.Angular.csproj", "{0B320BCD-8FD8-480B-9BE4-CD138C2CD3BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
