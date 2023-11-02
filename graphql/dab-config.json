@@ -25,5 +25,28 @@
       }
     }
   },
-  "entities": {}
+  "entities": {
+    "Item": {
+      "source": "items",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "Supplier": {
+      "source": "suppliers",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    }
+  }
 }

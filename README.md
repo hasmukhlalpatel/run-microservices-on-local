@@ -47,4 +47,9 @@ If you haven't installed tye, follow the [Getting Started Instructions](https://
 	```
 	cd  graphql
 	dab init --database-type "cosmosdb_nosql" --graphql-schema schema.gql --cosmosdb_nosql-database titanStoreDB --connection-string "AccountEndpoint=https://localhost:8081/;AccountKey=REPLACEME;" --host-mode "Development"
+	
+	dab add Item --source items --permissions "anonymous:*"
+	dab add Supplier --source suppliers --permissions "anonymous:*"
+	
+	dab start
 	```
