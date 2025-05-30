@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 namespace Sample.Tests
 {
     public class BasicEndpointTests : CustomWebApplicationFactory
-    {
-    public class BasicEndpointTests : CustomWebApplicationFactory
 
     [Test]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
