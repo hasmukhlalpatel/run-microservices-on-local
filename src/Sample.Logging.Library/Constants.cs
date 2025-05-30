@@ -5,6 +5,7 @@
         public const string CorrelationId = "CorrelationId";
         public const string XCorrelationId = "X-Correlation-Id";
         public const string AppLoggerContext = "AppLoggerContext";
+        public const string LogicalCallContext = "X-Context";
     }
 
     internal static class Constants

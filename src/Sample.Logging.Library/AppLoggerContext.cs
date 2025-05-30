@@ -2,10 +2,10 @@
 
 namespace Sample.Logging.Library
 {
-    public class AppLoggerContext : Dictionary<string, string>, IAppLoggerContext
+    public class AppLoggerContext : Dictionary<string, object>, IAppLoggerContext
     {
         public AppLoggerContext() { }
-        public AppLoggerContext(Dictionary<string, string> dictionary)
+        public AppLoggerContext(Dictionary<string, object> dictionary)
             : base(dictionary)
         {
         }
@@ -22,10 +22,13 @@ namespace Sample.Logging.Library
 
         protected string TryGetValue(string key)
         {
-            return TryGetValue(key, out var value) ? value : null;
+            return TryGetValue(key, out var value) ? value.ToString() : null;
         }
-
         string IAppLoggerContext.GetContext()
+        {
+            return GetContext();
+        }
+        internal string GetContext()
         {
             var xContext = new List<string>();
             foreach (var key in Keys)
@@ -34,12 +37,20 @@ namespace Sample.Logging.Library
             }
             return string.Join("|", xContext);
         }
+        bool IAppLoggerContext.TryAddValue(string key, string value)
+        {
+            return TryAddValue(key, value);
+        }
 
         internal bool TryAddValue(string key, string value)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
                 return false;
             return this.TryAdd(key, value);
+        }
+        public override string ToString()
+        {
+            return nameof(AppLoggerContext);
         }
     }
 }

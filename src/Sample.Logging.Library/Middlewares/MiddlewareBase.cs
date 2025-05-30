@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Sample.Logging.Library.Extensions;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +32,65 @@ namespace Sample.Logging.Library.Middlewares
             // Reset request body position for downstream processing
             context.Request.Body.Position = 0;
             return body;
+        }
+        protected virtual IDictionary<string, string> AddExtraMetadata(HttpContext context)
+        {
+            return null;
+        }
+
+        protected virtual void ProcessExtraMetadata(HttpContext context, IAppLoggerContext appLoggerContext)
+        {
+            var extraMetadata = AddExtraMetadata(context);
+            if (extraMetadata != null)
+            {
+                foreach (var metadata in extraMetadata)
+                {
+                    appLoggerContext.TryAddValue(metadata.Key, metadata.Value);
+                }
+            }
+        }
+        protected internal async Task InvokeInternalAsync(HttpContext context,
+                Func<HttpContext, Task<(bool success, string correlationId, string correlationIdSource)>> GetCorrelationIdFromOtherSourceFunc = null)
+        {
+            var appLoggerContext = (AppLoggerContext)context.Request.Headers.BuildLogicalCallContext();
+            // Generate or retrieve existing correlation id
+            var correlationId = appLoggerContext.CorrelationId;
+            var xCorrelationId = correlationId != null ? appLoggerContext.XCorrelationId : null;
+            correlationId = correlationId ?? xCorrelationId;
+            var correlationIdSource = correlationId == null ? "A New" : "In Header";
+
+            if (correlationId == null && GetCorrelationIdFromOtherSourceFunc != null)
+            {
+                var fromOtherSourceResult = await GetCorrelationIdFromOtherSourceFunc(context);
+                if (fromOtherSourceResult.success)
+                {
+                    correlationId = fromOtherSourceResult.correlationId;
+                    correlationIdSource = fromOtherSourceResult.correlationIdSource;
+                }
+            }
+
+            var loggerPropName = xCorrelationId != null && correlationId != null || xCorrelationId == null && correlationId == null
+                ? Constants.XCorrelationId
+                : Constants.CorrelationId;
+
+            correlationId = correlationId ?? Guid.NewGuid().ToString();
+            appLoggerContext.TryAddValue(loggerPropName, correlationId);
+            appLoggerContext.TryAddValue(Constants.CorrelationIdSource, correlationIdSource);
+            var clientIpAddress = context.Connection.RemoteIpAddress?.ToString();
+            appLoggerContext.TryAddValue(Constants.SourceMachine, clientIpAddress);
+
+            ProcessExtraMetadata(context, appLoggerContext);
+
+            context.Features.Set<IAppLoggerContext>(appLoggerContext);
+
+            using (new LogicalCallContext<IAppLoggerContext>(appLoggerContext))
+            using (_logger.BeginScope(appLoggerContext))
+            {
+                _logger.LogInformation($"Start processing request with {loggerPropName}: {correlationId}, was {correlationIdSource}");
+                await _next(context);
+                _logger.LogInformation($"End processing request with [{loggerPropName}]: {correlationId}");
+
+            }
         }
     }
 
