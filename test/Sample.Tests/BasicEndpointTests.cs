@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace Sample.Tests
 {
     public class BasicEndpointTests : CustomWebApplicationFactory
-
-    [Test]
+    {
+     [Test]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
         {
             string url = "/";

@@ -33,14 +33,14 @@ namespace Sample.Logging.Library.Middlewares
             context.Request.Body.Position = 0;
             return body;
         }
-        protected virtual IDictionary<string, string> AddExtraMetadata(HttpContext context)
+        protected virtual Task<IDictionary<string, string>> AddExtraMetadataAsync(HttpContext context)
         {
             return null;
         }
 
-        protected virtual void ProcessExtraMetadata(HttpContext context, IAppLoggerContext appLoggerContext)
+        protected virtual async Task ProcessExtraMetadataAsync(HttpContext context, IAppLoggerContext appLoggerContext)
         {
-            var extraMetadata = AddExtraMetadata(context);
+            var extraMetadata = await  AddExtraMetadataAsync(context);
             if (extraMetadata != null)
             {
                 foreach (var metadata in extraMetadata)
@@ -79,7 +79,7 @@ namespace Sample.Logging.Library.Middlewares
             var clientIpAddress = context.Connection.RemoteIpAddress?.ToString();
             appLoggerContext.TryAddValue(Constants.SourceMachine, clientIpAddress);
 
-            ProcessExtraMetadata(context, appLoggerContext);
+            await ProcessExtraMetadataAsync(context, appLoggerContext);
 
             context.Features.Set<IAppLoggerContext>(appLoggerContext);
 
