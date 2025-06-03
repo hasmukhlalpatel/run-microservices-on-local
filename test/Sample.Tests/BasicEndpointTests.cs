@@ -24,7 +24,7 @@ namespace Sample.Tests
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
             var correlationId = Guid.NewGuid().ToString();
             requestMessage.Headers.Add(LoggingConstants.CorrelationId, correlationId);
-            var response = await client.SendAsync(requestMessage);
+            response = await client.SendAsync(requestMessage);
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -45,9 +45,9 @@ namespace Sample.Tests
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
             var correlationId = Guid.NewGuid().ToString();
             requestMessage.Headers.Add(LoggingConstants.CorrelationId, correlationId);
-            requestMessage.Headers.Add(LoggingConstants.LogicalCallContext, tmpLogicalCallContex
-    
-            var response = await client.SendAsync(requestMessage);
+            requestMessage.Headers.Add(LoggingConstants.LogicalCallContext, tmpLogicalCallContext);
+
+            response = await client.SendAsync(requestMessage);
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299

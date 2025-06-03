@@ -33,8 +33,9 @@ namespace Sample.Logging.Library.Middlewares
             context.Request.Body.Position = 0;
             return body;
         }
-        protected virtual Task<IDictionary<string, string>> AddExtraMetadataAsync(HttpContext context)
+        protected virtual async Task<IDictionary<string, string>> AddExtraMetadataAsync(HttpContext context)
         {
+            await Task.CompletedTask;
             return null;
         }
 
@@ -48,6 +49,12 @@ namespace Sample.Logging.Library.Middlewares
                     appLoggerContext.TryAddValue(metadata.Key, metadata.Value);
                 }
             }
+        }
+        protected virtual async Task ProcessNextAsync(HttpContext context, IAppLoggerContext appLoggerContext, string logInfo)
+        {
+            _logger.LogInformation("Start " + logInfo);
+            await _next(context);
+            _logger.LogInformation("End " + logInfo);
         }
         protected internal async Task InvokeInternalAsync(HttpContext context,
                 Func<HttpContext, Task<(bool success, string correlationId, string correlationIdSource)>> GetCorrelationIdFromOtherSourceFunc = null)
@@ -86,10 +93,8 @@ namespace Sample.Logging.Library.Middlewares
             using (new LogicalCallContext<IAppLoggerContext>(appLoggerContext))
             using (_logger.BeginScope(appLoggerContext))
             {
-                _logger.LogInformation($"Start processing request with {loggerPropName}: {correlationId}, was {correlationIdSource}");
-                await _next(context);
-                _logger.LogInformation($"End processing request with [{loggerPropName}]: {correlationId}");
-
+                var loginfo = $"processing request with {loggerPropName}: {correlationId}, was {correlationIdSource}"
+                await ProcessNextAsync(context, appLoggerContext, loginfo);
             }
         }
     }
