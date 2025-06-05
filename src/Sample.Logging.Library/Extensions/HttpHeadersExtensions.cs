@@ -1,19 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sample.Logging.Library.Extensions
 {
     public static class HttpHeadersExtensions
     {
-        internal static void AddRequestHeader(this HttpHeaders headers, string key, string value)
+        public static void AddRequestHeader(this HttpHeaders headers, string key, string value)
         {
-
+            if (!string.IsNullOrEmpty(key) && string.IsNullOrEmpty(value))
+            {
+                headers.TryAddWithoutValidation(key, value);
+            }
         }
 
         public static void AddLogicalCallContextOnRequestHeaders(this HttpHeaders headers)
@@ -31,6 +31,7 @@ namespace Sample.Logging.Library.Extensions
             }
             catch (Exception)
             {
+                Console.WriteLine("Error while adding logical call context to request headers.");
             }
         }
 
