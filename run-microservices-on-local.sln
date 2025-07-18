@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Logging.Library", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Serialization.Library", "src\Sample.Serialization.Library\Sample.Serialization.Library.csproj", "{3DED9521-EFEF-43D1-A94C-9CFDA539B9D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Kafka.Library", "src\Samples.Kafka.Library\Samples.Kafka.Library.csproj", "{7B155FC1-C8CF-4C47-AC8A-AD6025F69936}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{3DED9521-EFEF-43D1-A94C-9CFDA539B9D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DED9521-EFEF-43D1-A94C-9CFDA539B9D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DED9521-EFEF-43D1-A94C-9CFDA539B9D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B155FC1-C8CF-4C47-AC8A-AD6025F69936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B155FC1-C8CF-4C47-AC8A-AD6025F69936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B155FC1-C8CF-4C47-AC8A-AD6025F69936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B155FC1-C8CF-4C47-AC8A-AD6025F69936}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{5900B668-BB3F-4511-937E-C89D62EB9C81} = {2C20BC5C-19D6-4390-AAB5-768867FED9A6}
 		{83D44CBB-DEC4-4A38-8BE6-2C813525CCAA} = {68ED2354-7DA6-4274-A98E-3528501EE025}
 		{3DED9521-EFEF-43D1-A94C-9CFDA539B9D5} = {68ED2354-7DA6-4274-A98E-3528501EE025}
+		{7B155FC1-C8CF-4C47-AC8A-AD6025F69936} = {68ED2354-7DA6-4274-A98E-3528501EE025}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F30ED84-A526-4E80-AB32-C99B2CE0CB73}
