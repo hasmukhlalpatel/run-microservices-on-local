@@ -1,0 +1,34 @@
+{
+  "UserConfig": {
+    "Namespaces": [
+      {
+        "Name": "sbemulatorns",
+        "Queues": [
+          {
+            "Name": "queue1",
+            "Properties": {
+              "DefaultMessageTimeToLive": "PT1H",
+              "MaxDeliveryCount": 10
+            }
+          }
+        ],
+        "Topics": [
+          {
+            "Name": "topic1",
+            "Properties": {
+              "DefaultMessageTimeToLive": "PT1H"
+            },
+            "Subscriptions": [
+              {
+                "Name": "sub1",
+                "Properties": {
+                  "MaxDeliveryCount": 10
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

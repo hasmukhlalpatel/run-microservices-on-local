@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - ./azurite:/data
+    command: "azurite --location /data --debug /data/debug.log"
+
+  cosmosdb-emulator:
+    image: mcr.microsoft.com/cosmosdb/windows/azure-cosmos-emulator
+    container_name: cosmosdb-emulator
+    ports:
+      - "8081:8081"
+    isolation: process
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - cosmosdata:/data
+    platform: windows
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-lts
+    container_name: mssql
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+    volumes:
+      - mssqldata:/var/opt/mssql
+
+  sqledge:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: sqledge
+    ports:
+      - "14333:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+
+  servicebus-emulator:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    container_name: servicebus-emulator
+    ports:
+      - "5672:5672"   # AMQP
+      - "5300:5300"   # Management
+    volumes:
+      - ./servicebus-config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
+    environment:
+      - SQL_SERVER=sqledge
+      - MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+      - ACCEPT_EULA=Y
+    depends_on:
+      - sqledge
+
+volumes:
+  cosmosdata:
+  mssqldata:

@@ -48,6 +48,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Serialization.Librar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Kafka.Library", "src\Samples.Kafka.Library\Samples.Kafka.Library.csproj", "{7B155FC1-C8CF-4C47-AC8A-AD6025F69936}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MS-Emulators", "MS-Emulators", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		MS-Emulators\docker-compose.yml = MS-Emulators\docker-compose.yml
+		MS-Emulators\README.md = MS-Emulators\README.md
+		MS-Emulators\servicebus-config.json = MS-Emulators\servicebus-config.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
