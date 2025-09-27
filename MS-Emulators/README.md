@@ -11,7 +11,17 @@ To use these emulators
 ```
 docker-compose up
 
-``
+```
+
+## PowerShell Script to manage emulators
+A PowerShell script is provided to manage the lifecycle of these emulators. You can start, stop, and check the status of the emulators using the following commands:
+
+### Function Wrapper (Best for parameters):
+
+```
+function emulators-setup { & "C:\Path\To\Your\Manage-Emulators.ps1" @args }
+```
+
 ## Resources settings
 * [Azure Cosmos DB Emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21)
 * [Azure Storage/ Azurite Emulator (Docker)](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=docker-hub%2Cblob-storage#run-azurite-in-a-docker-container)
