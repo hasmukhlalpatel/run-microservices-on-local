@@ -21,6 +21,14 @@ A PowerShell script is provided to manage the lifecycle of these emulators. You 
 ```
 function emulators-setup { & "C:\Path\To\Your\Manage-Emulators.ps1" @args }
 ```
+or
+```
+.\Manage-Emulators.ps1 <command>
+```
+or
+```
+function Manage-Emulators { & "C:\Path\To\Your\Manage-Emulators.ps1" @args }
+```
 
 ## Resources settings
 * [Azure Cosmos DB Emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21)

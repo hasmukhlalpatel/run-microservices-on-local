@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$false)]
-    [ValidateSet("help", "check", "stop", "export", "import", "interactive", "start-azurite")]
+    [ValidateSet("help", "check", "stop", "export", "import", "interactive", "start-azurite", "stop-azurite")]
     [string]$Command = "help")
 
 # Example aliases
@@ -21,12 +21,13 @@ function Show-Help {
     Write-Host "Usage: $sriptName -Command <command>" -ForegroundColor White
     Write-Host ""
     Write-Host "Parameters:" -ForegroundColor Yellow
-    Write-Host "  -Command    Command to execute (help, check, start-azurite)" -ForegroundColor White
+    Write-Host "  -Command    Command to execute (help, check, start-azurite, stop-azurite)" -ForegroundColor White
     Write-Host ""
     Write-Host "Commands:" -ForegroundColor Yellow
     Write-Host "  help          Show this help message" -ForegroundColor White
     Write-Host "  check         Check if the specified container is running" -ForegroundColor White
     Write-Host "  start-azurite Start the Azurite storage emulator" -ForegroundColor White
+    Write-Host "  stop-azurite  Stop the Azurite storage emulator" -ForegroundColor White
 }
 
 function Start-Azurite {
@@ -66,6 +67,29 @@ function Start-Azurite {
     }
 }
 
+function Stop-Azurite {
+    Write-Host "Stopping Azurite storage emulator..." -ForegroundColor Cyan
+    
+    # Check if container is running
+    $containerRunning = docker ps --filter "name=azurite" --format "{{.Names}}"
+    
+    if (-not $containerRunning) {
+        Write-Host "Azurite is not running!" -ForegroundColor Yellow
+        return
+    }
+    
+    # Stop the container
+    docker stop azurite
+    
+    # Verify the container is stopped
+    $stillRunning = docker ps --filter "name=azurite" --format "{{.Names}}"
+    if (-not $stillRunning) {
+        Write-Host "Azurite has been stopped successfully!" -ForegroundColor Green
+    } else {
+        Write-Host "Failed to stop Azurite!" -ForegroundColor Red
+    }
+}
+
 function Run-Main(){
     param([string]$command,  [string]$name, [string]$distro, [string]$filePath, [string]$installLocation )
     # Main script logic
@@ -75,6 +99,9 @@ function Run-Main(){
         }
         "start-azurite" {
             Start-Azurite
+        }
+        "stop-azurite" {
+            Stop-Azurite
         }
         default {
             Show-Help
