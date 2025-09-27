@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$false)]
-    [ValidateSet("help", "check", "stop", "export", "import", "interactive", "start-azurite", "stop-azurite")]
+    [ValidateSet("help", "export", "import", "interactive", "start-azurite", "stop-azurite", "start-cosmos", "stop-cosmos")]
     [string]$Command = "help")
 
 # Example aliases
@@ -21,13 +21,15 @@ function Show-Help {
     Write-Host "Usage: $sriptName -Command <command>" -ForegroundColor White
     Write-Host ""
     Write-Host "Parameters:" -ForegroundColor Yellow
-    Write-Host "  -Command    Command to execute (help, check, start-azurite, stop-azurite)" -ForegroundColor White
+    Write-Host "  -Command    Command to execute (help, start-azurite, stop-azurite, start-cosmos, stop-cosmos)" -ForegroundColor White
     Write-Host ""
     Write-Host "Commands:" -ForegroundColor Yellow
     Write-Host "  help          Show this help message" -ForegroundColor White
     Write-Host "  check         Check if the specified container is running" -ForegroundColor White
     Write-Host "  start-azurite Start the Azurite storage emulator" -ForegroundColor White
     Write-Host "  stop-azurite  Stop the Azurite storage emulator" -ForegroundColor White
+    Write-Host "  start-cosmos  Start the CosmosDB emulator" -ForegroundColor White
+    Write-Host "  stop-cosmos   Stop the CosmosDB emulator" -ForegroundColor White
 }
 
 function Start-Azurite {
@@ -90,6 +92,75 @@ function Stop-Azurite {
     }
 }
 
+function Start-CosmosDb {
+    Write-Host "Starting CosmosDB emulator..." -ForegroundColor Cyan
+    
+    # Check if container exists and is running
+    $containerExists = docker ps -a --filter "name=cosmosdb-emulator" --format "{{.Names}}"
+    $containerRunning = docker ps --filter "name=cosmosdb-emulator" --format "{{.Names}}"
+    
+    if ($containerRunning) {
+        Write-Host "CosmosDB emulator is already running!" -ForegroundColor Green
+        return
+    }
+    
+    if ($containerExists) {
+        Write-Host "Starting existing CosmosDB emulator container..." -ForegroundColor Yellow
+        docker start cosmosdb-emulator
+    } else {
+        Write-Host "Creating and starting new CosmosDB emulator container..." -ForegroundColor Yellow
+        docker-compose up -d cosmosdb-emulator
+    }
+    
+    # Wait for the container to be healthy (CosmosDB emulator takes time to start)
+    Write-Host "Waiting for CosmosDB emulator to be ready..." -ForegroundColor Yellow
+    $maxAttempts = 30
+    $attempt = 0
+    $ready = $false
+    
+    do {
+        $attempt++
+        $status = docker ps --filter "name=cosmosdb-emulator" --format "{{.Status}}"
+        if ($status -match "healthy") {
+            $ready = $true
+            break
+        }
+        Write-Host "Waiting for CosmosDB emulator to start (attempt $attempt of $maxAttempts)..." -ForegroundColor Yellow
+        Start-Sleep -Seconds 10
+    } while ($attempt -lt $maxAttempts)
+    
+    if ($ready) {
+        Write-Host "CosmosDB emulator is now running!" -ForegroundColor Green
+        Write-Host "Endpoint: https://localhost:8081" -ForegroundColor White
+        Write-Host "Primary Key: C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==" -ForegroundColor White
+    } else {
+        Write-Host "Failed to start CosmosDB emulator or timed out waiting for it to be ready!" -ForegroundColor Red
+    }
+}
+
+function Stop-CosmosDb {
+    Write-Host "Stopping CosmosDB emulator..." -ForegroundColor Cyan
+    
+    # Check if container is running
+    $containerRunning = docker ps --filter "name=cosmosdb-emulator" --format "{{.Names}}"
+    
+    if (-not $containerRunning) {
+        Write-Host "CosmosDB emulator is not running!" -ForegroundColor Yellow
+        return
+    }
+    
+    # Stop the container
+    docker stop cosmosdb-emulator
+    
+    # Verify the container is stopped
+    $stillRunning = docker ps --filter "name=cosmosdb-emulator" --format "{{.Names}}"
+    if (-not $stillRunning) {
+        Write-Host "CosmosDB emulator has been stopped successfully!" -ForegroundColor Green
+    } else {
+        Write-Host "Failed to stop CosmosDB emulator!" -ForegroundColor Red
+    }
+}
+
 function Run-Main(){
     param([string]$command,  [string]$name, [string]$distro, [string]$filePath, [string]$installLocation )
     # Main script logic
@@ -102,6 +173,12 @@ function Run-Main(){
         }
         "stop-azurite" {
             Stop-Azurite
+        }
+        "start-cosmos" {
+            Start-CosmosDb
+        }
+        "stop-cosmos" {
+            Stop-CosmosDb
         }
         default {
             Show-Help
