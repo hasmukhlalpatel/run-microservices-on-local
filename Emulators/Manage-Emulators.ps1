@@ -150,7 +150,7 @@ function Start-Azurite {
 }
 
 function Stop-Azurite {
-    stop-Container -Name $Azurite -FullName "Azurite storage emulator"
+    Stop-Container -Name $Azurite -FullName "Azurite storage emulator"
 }
 
 function Start-CosmosDb {
@@ -168,19 +168,7 @@ function Start-CosmosDb {
 }
 
 function Stop-CosmosDb {
-    stop-Container -Name $CosmosDb -FullName "CosmosDB emulator"
-   
-    if (-not (Check-ContainerRunning -name  $CosmosDb)) {
-        Write-Host "CosmosDB emulator is not running!" -ForegroundColor Yellow
-        return
-    }
-    # Verify the container is stopped
-    $stillRunning = Check-ContainerRunning -name  $CosmosDb
-    if (-not $stillRunning) {
-        Write-Host "CosmosDB emulator has been stopped successfully!" -ForegroundColor Green
-    } else {
-        Write-Host "Failed to stop CosmosDB emulator!" -ForegroundColor Red
-    }
+    Stop-Container -Name $CosmosDb -FullName "CosmosDB emulator"
 }
 
 function Start-MsSql {
@@ -197,18 +185,11 @@ function Start-MsSql {
 }
 
 function Stop-MsSql {
-    Stop-Container -Name $MsSql -FullName "MSSQL Server"    
-    
-    $stillRunning = Check-ContainerRunning -name  $MsSql
-    if (-not $stillRunning) {
-        Write-Host "MSSQL Server has been stopped successfully!" -ForegroundColor Green
-    } else {
-        Write-Host "Failed to stop MSSQL Server!" -ForegroundColor Red
-    }
+    Stop-Container -Name $MsSql -FullName "MSSQL Server"
 }
 
 function Start-SqlEdge {
-    start-Container -Name $SqlEdge -FullName "SQL Edge"
+    Start-Container -Name $SqlEdge -FullName "SQL Edge"
 
     $ready = Wait-ForContainer -name $SqlEdge -fullName "SQL Edge" -maxAttempts 12 -delaySeconds 10
    
@@ -221,21 +202,14 @@ function Start-SqlEdge {
 }
 
 function Stop-SqlEdge {
-    stop-Container -Name $SqlEdge -FullName "SQL Edge"
-    
-    $stillRunning = Check-ContainerRunning -name  $SqlEdge
-    if (-not $stillRunning) {
-        Write-Host "SQL Edge has been stopped successfully!" -ForegroundColor Green
-    } else {
-        Write-Host "Failed to stop SQL Edge!" -ForegroundColor Red
-    }
+    Stop-Container -Name $SqlEdge -FullName "SQL Edge"
 }
 
 function Start-ServiceBus {
     Write-Host "Starting Service Bus emulator..." -ForegroundColor Cyan
     
     # First check if SQL Edge is running as Service Bus depends on it
-    $sqlEdgeRunning =  Check-ContainerRunning -name  $SqlEdge
+    $sqlEdgeRunning =  Check-ContainerRunning -name $SqlEdge
     if (-not $sqlEdgeRunning) {
         Write-Host "SQL Edge is required for Service Bus emulator. Starting SQL Edge first..." -ForegroundColor Yellow
         Start-SqlEdge
@@ -255,14 +229,7 @@ function Start-ServiceBus {
 }
 
 function Stop-ServiceBus {
-    stop-Container -Name $ServiceBus -FullName "Service Bus emulator"
-    
-    $stillRunning = Check-ContainerRunning -name  $ServiceBus
-    if (-not $stillRunning) {
-        Write-Host "Service Bus emulator has been stopped successfully!" -ForegroundColor Green
-    } else {
-        Write-Host "Failed to stop Service Bus emulator!" -ForegroundColor Red
-    }
+    Stop-Container -Name $ServiceBus -FullName "Service Bus emulator"
 }
 
 function Run-Main(){
