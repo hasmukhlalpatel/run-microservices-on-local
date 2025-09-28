@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /.tye
 /src/UISamples.Angular/ClientApp/.angular/cache/15.2.7
+/Emulators/azurite
